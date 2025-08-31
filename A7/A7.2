@@ -1,0 +1,146 @@
+/*
+    CH-230-A
+    a7.p2.c
+    Stirbu Alicia Florentina
+    astirbu@constructor.university
+*/
+#include <stdio.h>
+#include <stdlib.h>
+
+//declaration of the struct for the doubly linked list
+typedef struct element {
+    //pointer to the previous element
+    struct element* previous;
+     //character value of the element
+    char value;
+     //pointer to the next element
+    struct element* next;
+} element;
+
+//function to add an element to the start of the list
+void add_to_start(element** head, char val) {
+    element* new_node = (element*)malloc(sizeof(element));
+    if(new_node == NULL){
+        printf("Error allocating memory");
+        return;
+    }
+    new_node->value = val;
+    //new node will be the first, so previous is NULL
+    new_node->previous = NULL;
+     //new node points to the current head
+    new_node->next = *head;
+    if (*head != NULL) {
+        (*head)->previous = new_node;
+    }
+    //set the new node as the new head
+    *head = new_node;
+}
+
+//function to delete a character from the list
+void delete_character(element** head, char val) {
+    int found = 0;
+    element* current = *head;
+    while (current != NULL) {
+        //if the current element matches the value
+        if (current->value == val) {
+            found = 1; //element found
+            element* todelete = current;
+            //adjust pointers to remove the element from the list
+            if (current->previous != NULL) {
+                //link previous to next
+                current->previous->next = current->next;
+            } else {
+                *head = current->next;
+            }
+            if (current->next != NULL) {
+                current->next->previous = current->previous;
+            }
+            current = current->next;
+            free(todelete);
+        } else {
+            current = current->next;
+        }
+    }
+    if (found == 0) {
+        printf("The element is not in the list!\n");
+    }
+}
+
+//function to print the list from head to tail
+void print(element* head) {
+    if (head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+    element* current = head;
+    while (current != NULL) {
+        printf("%c ", current->value);
+        current = current->next; //move to the next element
+    }
+    printf("\n");
+}
+
+//function to print the list from tail to head
+void print_reverse(element* head) {
+    if (head == NULL) {
+        printf("Empty list\n");
+        return;
+    }
+    element* current = head;
+    //move the pointer to the last element
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    //print the list in reverse order
+    while (current != NULL) {
+        printf("%c ", current->value);
+        //move to the previous element
+        current = current->previous;
+    }
+    printf("\n");
+}
+
+//function to free the memory allocated for the list
+void free_memory(element** head) {
+    element* current = *head;
+    element* to_delete = NULL;
+    while (current != NULL) {
+        //we are storing the current element to delete
+        to_delete = current;
+        //moving to the next element
+        current = current->next;
+        free(to_delete);
+    }
+    *head = NULL;
+}
+int main() {
+    element* head = NULL;
+    while (1) {
+        char val;
+        int choice;
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                scanf(" %c", &val);
+                //call the function to add the element
+                add_to_start(&head, val);
+                break;
+            case 2: //deleting a character
+                scanf(" %c", &val);
+                delete_character(&head, val);
+                break;
+            case 3: //printing the list
+                print(head);
+                break;
+            case 4: //printing in reverse
+                print_reverse(head);
+                break;
+            case 5: //deallocating the memory
+                free_memory(&head);
+                return 0;
+                break;
+        }
+    }
+    return 0;
+}
