@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+//in the macro we use & (AND) 
+//to mask all bits except least significant bit
+#define LASTBIT(x) (x & 1)
+
+int main() {
+  unsigned char ch;
+  scanf("%c", &ch);
+  //attributing to a variable the value of macro
+  unsigned char last = LASTBIT(ch);
+  //printing the decimal representation and the bit
+  printf("The decimal representation is: %d\n", ch);
+  printf("The least significant bit is: %d\n", last);
+
+  return 0;
+}
