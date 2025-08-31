@@ -1,0 +1,66 @@
+/*
+    CH-230-A
+    a11.p3.c
+    Stirbu Alicia Florentina
+    astirbu@constructor.university
+*/
+
+#include "Creature.h"
+
+//contructor
+Creature::Creature() : distance(10)
+{
+    cout << "Creature Constructor has been called!\n";
+}
+//destructor
+Creature::~Creature() {
+    cout << "The Creature has been destroyed!\n";
+}
+
+void Creature::run() const
+{
+    cout << "running " << distance << " meters!\n";
+}
+
+Wizard::Wizard() : distFactor(3)
+{
+    cout << "Wizard Constructor has been called!\n";
+}
+
+Wizard::~Wizard() {
+    cout << "The Wizard has been destroyed!\n";
+}
+
+void Wizard::hover() const
+{
+    cout << "hovering " << (distFactor * distance) << " meters!\n";
+}
+//constructor for fairy
+Fairy::Fairy() : distContor(7)
+{
+    cout << "Fairy Constructor has been called!\n";
+}
+//destructor for fairy
+Fairy::~Fairy() {
+    cout << "The Fairy has been destroyed!\n";
+}
+
+void Fairy::fly() const
+{
+    cout << "The fairy flies " << (distContor * distance) << " meters!\n";
+}
+//constructor for witch
+Witch::Witch() : distMeter(12)
+{
+    cout << "Witch Constructor has been called!\n";
+}
+//destructor for witch
+Witch::~Witch() {
+    cout << "The Witch has been destroyed!\n";
+}
+
+void Witch::spell() const
+{
+    cout << "The witch put a spell on " << (distMeter * distance) 
+    << " people!\n";
+}
