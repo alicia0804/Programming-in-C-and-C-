@@ -1,0 +1,134 @@
+/*
+    CH-230-A
+    a11.p2.c
+    Stirbu Alicia Florentina
+    astirbu@constructor.university
+*/
+#include <iostream>
+
+using namespace std;
+
+class Creature {
+	public:
+		Creature();  
+        ~Creature();
+		void run() const;
+
+	protected:
+		int distance;
+};
+
+Creature::Creature(): distance(10)
+{
+    cout << "Creature Constructor has been called!\n";
+}    
+
+Creature::~Creature() {
+    cout << "The Creature has been destroyed!\n";
+}
+
+void Creature::run() const
+{ 
+    cout << "running " << distance << " meters!\n";
+}  
+
+class Wizard : public Creature {
+	public:
+		Wizard();
+        ~Wizard();
+		void hover() const;
+
+	private:
+		int distFactor;
+};
+
+Wizard::Wizard() : distFactor(3)
+{
+    cout << "Wizard Constructor has been called!\n";
+}  
+
+Wizard::~Wizard() {
+    cout << "The Wizard has been destroyed!\n";
+}
+
+void Wizard::hover() const
+{
+    cout << "hovering " << (distFactor * distance) << " meters!\n";
+}
+
+class Fairy : public Creature {
+	public:
+		Fairy();
+        ~Fairy();
+		void fly() const;
+
+	private:
+		int distContor;
+};
+//building the constructors 
+Fairy::Fairy() : distContor(7)
+{
+    cout << "Fairy Constructor has been called!\n";
+}  
+//destructor
+Fairy::~Fairy() {
+    cout << "The Fairy has been destroyed!\n";
+}
+
+void Fairy::fly() const
+{
+    cout << "The fairy flies " << (distContor * distance) << " meters!\n";
+}
+//building the class for witch
+class Witch : public Creature {
+	public:
+		Witch();
+        ~Witch();
+		void spell() const;
+
+	private:
+		int distMeter;
+};
+//building the constructor for the witch
+Witch::Witch() : distMeter(12)
+{
+    cout << "Witch Constructor has been called!\n";
+}  
+
+Witch::~Witch() {
+    cout << "The Witch has been destroyed!\n";
+}
+
+void Witch::spell() const
+{
+    cout << "The witch put a spell on " << (distMeter * distance) 
+    << " people!\n";
+}
+
+int main()
+{ 
+    //creating a creature:
+    cout << "Creating an Creature.\n";
+    Creature c;
+    c.run();
+
+    //creating a wizard:
+    cout << "\nCreating a Wizard.\n";
+    Wizard w;
+    w.run();
+    w.hover();
+
+    //creating a fairy
+    cout << "\nCreating a Fairy.\n";
+    Fairy fa;
+    fa.run();
+    fa.fly();
+
+    //creating a witch
+    cout << "\nCreating a Witch.\n";
+    Witch we;
+    we.run();
+    we.spell();
+
+    return 0;
+}
