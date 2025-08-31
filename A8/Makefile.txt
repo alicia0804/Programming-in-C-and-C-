@@ -1,0 +1,17 @@
+CC = gcc
+CFLAGS = -Wall -Wextra -g
+OBJ = linked_list.o use_linked_list.o
+
+all: $(OBJ)
+
+linked_list.o: linked_list.c linked_list.h
+	$(CC) $(CFLAGS) -c linked_list.c
+
+use_linked_list.o: use_linked_list.c linked_list.h
+	$(CC) $(CFLAGS) -c use_linked_list.c
+
+linked_list: $(OBJ)
+	$(CC) $(CFLAGS) -o linked_list $(OBJ)
+
+clean:
+	rm -f $(OBJ) linked_list
